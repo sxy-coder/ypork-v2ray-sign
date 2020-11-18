@@ -12,7 +12,7 @@ if password == "":
     
 def send_wechat(content):
     # title and content must be string.
-    sckey = "SCU36037T22f0422808ccaabca3bb2f61044c0bc25c4290cd91060" # your key
+    sckey = "SCU119166T0ea65c364eae6a65613fa3672e1e8caa5f8e8a5bbf093" # your key
     title = "猪的大飞机翻墙流量签到通知"                                   
     url = 'https://sc.ftqq.com/' + sckey + '.send'
     data = {'text':title,'desp':content}

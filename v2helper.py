@@ -49,7 +49,7 @@ def main():
     t = json.loads(r2.text)
     if t["msg"]:
         print(t["msg"])
-        send_wechat("登录信息："+lm + "\n签到信息："+t['msg'])
+        send_wechat("登录信息："+lm + "\r\n签到信息："+t['msg'])
     else:
         print("Error")
         send_wechat("错误信息："+t['msg'])

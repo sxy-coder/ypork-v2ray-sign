@@ -13,7 +13,7 @@ if password == "":
 def send_wechat(content):
     # title and content must be string.
     sckey = "SCU36037T22f0422808ccaabca3bb2f61044c0bc25c4290cd91060" # your key
-    title = "Ypork-v2ray签到通知"                                   
+    title = "猪的大飞机翻墙流量签到通知"                                   
     url = 'https://sc.ftqq.com/' + sckey + '.send'
     data = {'text':title,'desp':content}
     result = requests.post(url,data)
@@ -27,7 +27,7 @@ def main():
     url0 = f'https://forever.ypork.com/auth/login'
     r = requests.get(url0, timeout=15)
     fromdata = {
-        'email':'1098978935@qq.com',
+        'email':'47730260@qq.com',
         'passwd': password
     }
     headers0 = {

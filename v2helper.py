@@ -37,9 +37,11 @@ def main():
     r0 = s.post(url0, data=fromdata, headers=headers0, timeout=15)
     if r0.status_code == 200:
         t = json.loads(r0.text)
+        lm = t['msg']
         print(t['msg'])
-        send_wechat("登录信息："+t['msg'])
-
+    else:
+        send_wechat("登录失败")
+            
     url2 = f"https://forever.ypork.com/user/checkin"
 
     r2 = s.post(url2, timeout=15)
@@ -47,7 +49,7 @@ def main():
     t = json.loads(r2.text)
     if t["msg"]:
         print(t["msg"])
-        send_wechat("签到信息："+t['msg'])
+        send_wechat("登录信息："+lm + "\n签到信息："+t['msg'])
     else:
         print("Error")
         send_wechat("错误信息："+t['msg'])

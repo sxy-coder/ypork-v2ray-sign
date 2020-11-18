@@ -12,8 +12,8 @@ if password == "":
     
 def send_wechat(content):
     # title and content must be string.
-    sckey = os.environ["PUSH_KEY"]
-    title = "网易云音乐签到通知"                                   
+    sckey = "SCU36037T22f0422808ccaabca3bb2f61044c0bc25c4290cd91060" # your key
+    title = "Ypork-v2ray签到通知"                                   
     url = 'https://sc.ftqq.com/' + sckey + '.send'
     data = {'text':title,'desp':content}
     result = requests.post(url,data)

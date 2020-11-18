@@ -6,7 +6,7 @@ import random
 # 加入随机延时
 time.sleep(random.randint(1,3))
 
-password = "zz82910592"
+password = ""
 if password == "":
     password = input().strip()
 

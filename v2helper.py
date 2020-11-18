@@ -9,6 +9,15 @@ time.sleep(random.randint(1,3))
 password = ""
 if password == "":
     password = input().strip()
+    
+def send_wechat(content):
+    # title and content must be string.
+    sckey = os.environ["PUSH_KEY"]
+    title = "网易云音乐签到通知"                                   
+    url = 'https://sc.ftqq.com/' + sckey + '.send'
+    data = {'text':title,'desp':content}
+    result = requests.post(url,data)
+    return(result)    
 
 def main():
     s = requests.session()
@@ -29,6 +38,7 @@ def main():
     if r0.status_code == 200:
         t = json.loads(r0.text)
         print(t['msg'])
+        send_wechat("登录信息："+t['msg'])
 
     url2 = f"https://forever.ypork.com/user/checkin"
 
@@ -37,8 +47,10 @@ def main():
     t = json.loads(r2.text)
     if t["msg"]:
         print(t["msg"])
+        send_wechat("签到信息："+t['msg'])
     else:
         print("Error")
+        send_wechat("错误信息："+t['msg'])
         exit(100)
 
 if __name__ == "__main__":

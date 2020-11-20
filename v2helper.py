@@ -2,6 +2,8 @@ import requests
 import json
 import time
 import random
+import re   
+from bs4 import BeautifulSoup
 
 # 加入随机延时
 time.sleep(random.randint(1,3))
@@ -43,13 +45,30 @@ def main():
         send_wechat("登录失败")
             
     url2 = f"https://forever.ypork.com/user/checkin"
-
     r2 = s.post(url2, timeout=15)
     r2.raise_for_status()
     t = json.loads(r2.text)
     if t["msg"]:
         print(t["msg"])
-        send_wechat("登录信息："+lm + "\r\n签到信息："+t['msg'])
+        url3='https://forever.ypork.com/user'
+        r3 = s.get(url3).content
+        soup = BeautifulSoup(r3,'html.parser',from_encoding='utf-8')
+        #print(soup)
+        trafficinfo=""
+        for progressbar in soup.find_all('div', class_='progressbar'):
+            #print(progressbar)
+            m_trafficinfo=progressbar.find('span',class_='traffic-info').get_text()
+            #print(m_trafficinfo)
+            m_code=progressbar.find('code').get_text()
+            #print(m_code)
+            trafficinfo = trafficinfo +'\n' + '\n' + m_trafficinfo + '：'+ m_code
+            
+            #m_liuliang = m_code[0].contents[0]
+            #print(m_liuliang)
+        print(trafficinfo)
+        send_msg = '登录信息：'+lm + '\n' + '\n' + '签到信息：' + t['msg'] + '\n' + '\n' + trafficinfo
+        print(send_msg)
+        send_wechat(send_msg)    
     else:
         print("Error")
         send_wechat("错误信息："+t['msg'])
